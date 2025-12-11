@@ -1,0 +1,154 @@
+{
+	"deploy": {
+		"VM:-": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"main:1": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"sepolia:11155111": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"Custom": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		}
+	},
+	"data": {
+		"bytecode": {
+			"functionDebugData": {},
+			"generatedSources": [],
+			"linkReferences": {},
+			"object": "",
+			"opcodes": "",
+			"sourceMap": ""
+		},
+		"deployedBytecode": {
+			"functionDebugData": {},
+			"generatedSources": [],
+			"immutableReferences": {},
+			"linkReferences": {},
+			"object": "",
+			"opcodes": "",
+			"sourceMap": ""
+		},
+		"gasEstimates": null,
+		"methodIdentifiers": {
+			"mintReceipt(address,address,uint256,uint256,uint256,uint256,uint256,string)": "d2d8fd5d",
+			"mintRentPaymentProof(address,address,uint256,uint256,uint256,uint256,uint256,string)": "c274cb56"
+		}
+	},
+	"abi": [
+		{
+			"inputs": [
+				{
+					"internalType": "address",
+					"name": "tenant",
+					"type": "address"
+				},
+				{
+					"internalType": "address",
+					"name": "landlord",
+					"type": "address"
+				},
+				{
+					"internalType": "uint256",
+					"name": "propertyId",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "depositAmount",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "rentAmount",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "startDate",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "endDate",
+					"type": "uint256"
+				},
+				{
+					"internalType": "string",
+					"name": "metadataHash",
+					"type": "string"
+				}
+			],
+			"name": "mintReceipt",
+			"outputs": [
+				{
+					"internalType": "uint256",
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "address",
+					"name": "tenant",
+					"type": "address"
+				},
+				{
+					"internalType": "address",
+					"name": "landlord",
+					"type": "address"
+				},
+				{
+					"internalType": "uint256",
+					"name": "agreementId",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "rentAmount",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "paymentDate",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "periodStart",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "periodEnd",
+					"type": "uint256"
+				},
+				{
+					"internalType": "string",
+					"name": "metadataHash",
+					"type": "string"
+				}
+			],
+			"name": "mintRentPaymentProof",
+			"outputs": [
+				{
+					"internalType": "uint256",
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		}
+	]
+}

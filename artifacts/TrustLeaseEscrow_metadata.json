@@ -1,0 +1,1752 @@
+{
+	"compiler": {
+		"version": "0.8.28+commit.7893614a"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_propertyVerification",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_rentalReceipt",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_platformWallet",
+						"type": "address"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"inputs": [],
+				"name": "EnforcedPause",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "ExpectedPause",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "FailedCall",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "balance",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "needed",
+						"type": "uint256"
+					}
+				],
+				"name": "InsufficientBalance",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					}
+				],
+				"name": "OwnableInvalidOwner",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					}
+				],
+				"name": "OwnableUnauthorizedAccount",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "ReentrancyGuardReentrantCall",
+				"type": "error"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "agreementId",
+						"type": "uint256"
+					}
+				],
+				"name": "AgreementCancelled",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "agreementId",
+						"type": "uint256"
+					},
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "propertyId",
+						"type": "uint256"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "tenant",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "landlord",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "depositAmount",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "monthlyRent",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "rentInterval",
+						"type": "uint256"
+					}
+				],
+				"name": "AgreementCreated",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "agreementId",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "refundAmount",
+						"type": "uint256"
+					}
+				],
+				"name": "AgreementTerminated",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "agreementId",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "platformFee",
+						"type": "uint256"
+					}
+				],
+				"name": "DepositReleased",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "agreementId",
+						"type": "uint256"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "initiator",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "reason",
+						"type": "string"
+					},
+					{
+						"indexed": false,
+						"internalType": "bool",
+						"name": "isRentDispute",
+						"type": "bool"
+					}
+				],
+				"name": "DisputeRaised",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "agreementId",
+						"type": "uint256"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "winner",
+						"type": "address"
+					}
+				],
+				"name": "DisputeResolved",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "agreementId",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "evidenceHash",
+						"type": "string"
+					}
+				],
+				"name": "EvidenceSubmitted",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "agreementId",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "landlordNet",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "platformTotal",
+						"type": "uint256"
+					}
+				],
+				"name": "FeeBreakdownCalculated",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "tenant",
+						"type": "address"
+					}
+				],
+				"name": "GasSubsidyGranted",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "agreementId",
+						"type": "uint256"
+					}
+				],
+				"name": "LandlordConfirmed",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "previousOwner",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "newOwner",
+						"type": "address"
+					}
+				],
+				"name": "OwnershipTransferred",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					}
+				],
+				"name": "Paused",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "agreementId",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "daysOverdue",
+						"type": "uint256"
+					}
+				],
+				"name": "RentOverdue",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "agreementId",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "periodStart",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "periodEnd",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "nextDueDate",
+						"type": "uint256"
+					}
+				],
+				"name": "RentPaid",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "agreementId",
+						"type": "uint256"
+					}
+				],
+				"name": "TenantConfirmed",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "agreementId",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "TenantRefunded",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					}
+				],
+				"name": "Unpaused",
+				"type": "event"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "agreements",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "agreementId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "propertyId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "tenant",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "landlord",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "depositAmount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "monthlyRent",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "rentInterval",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "startDate",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "endDate",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "createdAt",
+						"type": "uint256"
+					},
+					{
+						"internalType": "enum TrustLeaseEscrow.AgreementStatus",
+						"name": "status",
+						"type": "uint8"
+					},
+					{
+						"internalType": "string",
+						"name": "metadataHash",
+						"type": "string"
+					},
+					{
+						"internalType": "bool",
+						"name": "tenantConfirmed",
+						"type": "bool"
+					},
+					{
+						"internalType": "bool",
+						"name": "landlordConfirmed",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint256",
+						"name": "disputeDeadline",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "nextRentDueDate",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "overdueGracePeriod",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "totalRentPaid",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "agreementId",
+						"type": "uint256"
+					}
+				],
+				"name": "calculateFeeBreakdown",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "depositAmount",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "totalRentPaid",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "platformFeeOnDeposit",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "platformFeeOnRent",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "listingFee",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "totalGasSponsored",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "netToLandlord",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "netToTenant",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct TrustLeaseEscrow.FeeBreakdown",
+						"name": "",
+						"type": "tuple"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "agreementId",
+						"type": "uint256"
+					}
+				],
+				"name": "cancelAgreement",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "agreementId",
+						"type": "uint256"
+					}
+				],
+				"name": "checkRentOverdue",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "propertyId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "landlord",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "monthlyRent",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "rentInterval",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "startDate",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "endDate",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "metadataHash",
+						"type": "string"
+					}
+				],
+				"name": "createAgreement",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "defaultGracePeriod",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "disputePeriod",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "disputes",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "agreementId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "initiator",
+						"type": "address"
+					},
+					{
+						"internalType": "string",
+						"name": "reason",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "createdAt",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "resolved",
+						"type": "bool"
+					},
+					{
+						"internalType": "address",
+						"name": "winner",
+						"type": "address"
+					},
+					{
+						"internalType": "bool",
+						"name": "isRentDispute",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "fundGasSubsidy",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "gasSubsidyPool",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "agreementId",
+						"type": "uint256"
+					}
+				],
+				"name": "getAgreement",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "agreementId",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "propertyId",
+								"type": "uint256"
+							},
+							{
+								"internalType": "address",
+								"name": "tenant",
+								"type": "address"
+							},
+							{
+								"internalType": "address",
+								"name": "landlord",
+								"type": "address"
+							},
+							{
+								"internalType": "uint256",
+								"name": "depositAmount",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "monthlyRent",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "rentInterval",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "startDate",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "endDate",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "createdAt",
+								"type": "uint256"
+							},
+							{
+								"internalType": "enum TrustLeaseEscrow.AgreementStatus",
+								"name": "status",
+								"type": "uint8"
+							},
+							{
+								"internalType": "string",
+								"name": "metadataHash",
+								"type": "string"
+							},
+							{
+								"internalType": "bool",
+								"name": "tenantConfirmed",
+								"type": "bool"
+							},
+							{
+								"internalType": "bool",
+								"name": "landlordConfirmed",
+								"type": "bool"
+							},
+							{
+								"internalType": "uint256",
+								"name": "disputeDeadline",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "nextRentDueDate",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "overdueGracePeriod",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "totalRentPaid",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct TrustLeaseEscrow.RentalAgreement",
+						"name": "",
+						"type": "tuple"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "agreementId",
+						"type": "uint256"
+					}
+				],
+				"name": "getDispute",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "initiator",
+						"type": "address"
+					},
+					{
+						"internalType": "string",
+						"name": "reason",
+						"type": "string"
+					},
+					{
+						"internalType": "string[]",
+						"name": "evidenceHashes",
+						"type": "string[]"
+					},
+					{
+						"internalType": "uint256",
+						"name": "createdAt",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "resolved",
+						"type": "bool"
+					},
+					{
+						"internalType": "address",
+						"name": "winner",
+						"type": "address"
+					},
+					{
+						"internalType": "bool",
+						"name": "isRentDispute",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "landlord",
+						"type": "address"
+					}
+				],
+				"name": "getLandlordAgreements",
+				"outputs": [
+					{
+						"internalType": "uint256[]",
+						"name": "",
+						"type": "uint256[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "agreementId",
+						"type": "uint256"
+					}
+				],
+				"name": "getRentPayments",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "agreementId",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "amount",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "paidDate",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "periodStart",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "periodEnd",
+								"type": "uint256"
+							},
+							{
+								"internalType": "enum TrustLeaseEscrow.RentStatus",
+								"name": "status",
+								"type": "uint8"
+							}
+						],
+						"internalType": "struct TrustLeaseEscrow.RentPayment[]",
+						"name": "",
+						"type": "tuple[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "tenant",
+						"type": "address"
+					}
+				],
+				"name": "getTenantAgreements",
+				"outputs": [
+					{
+						"internalType": "uint256[]",
+						"name": "",
+						"type": "uint256[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "tenant",
+						"type": "address"
+					}
+				],
+				"name": "grantGasSubsidy",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "isGasSubsidized",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "landlordAgreements",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "agreementId",
+						"type": "uint256"
+					}
+				],
+				"name": "landlordConfirm",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "owner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "pause",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "paused",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "agreementId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "metadataHash",
+						"type": "string"
+					}
+				],
+				"name": "payRent",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "platformFeePercent",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "platformWallet",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "propertyVerification",
+				"outputs": [
+					{
+						"internalType": "contract IPropertyVerification",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "agreementId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "reason",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "evidenceHash",
+						"type": "string"
+					}
+				],
+				"name": "raiseDispute",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "agreementId",
+						"type": "uint256"
+					}
+				],
+				"name": "releaseDeposit",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "renounceOwnership",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "rentPayments",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "agreementId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "paidDate",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "periodStart",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "periodEnd",
+						"type": "uint256"
+					},
+					{
+						"internalType": "enum TrustLeaseEscrow.RentStatus",
+						"name": "status",
+						"type": "uint8"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "rentProcessingFeePercent",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "rentalReceipt",
+				"outputs": [
+					{
+						"internalType": "contract IRentalReceipt",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "agreementId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "refundTenant",
+						"type": "bool"
+					}
+				],
+				"name": "resolveDispute",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "agreementId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "evidenceHash",
+						"type": "string"
+					}
+				],
+				"name": "submitEvidence",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "tenantAgreements",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "agreementId",
+						"type": "uint256"
+					}
+				],
+				"name": "tenantConfirm",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "agreementId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "proRatedRefund",
+						"type": "uint256"
+					}
+				],
+				"name": "terminateAgreement",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "newOwner",
+						"type": "address"
+					}
+				],
+				"name": "transferOwnership",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "newPeriod",
+						"type": "uint256"
+					}
+				],
+				"name": "updateDisputePeriod",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "newPeriod",
+						"type": "uint256"
+					}
+				],
+				"name": "updateGracePeriod",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "newFeePercent",
+						"type": "uint256"
+					}
+				],
+				"name": "updatePlatformFee",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "newFeePercent",
+						"type": "uint256"
+					}
+				],
+				"name": "updateRentProcessingFee",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"details": "Integrates with PropertyVerification and RentalReceipt contracts",
+			"errors": {
+				"EnforcedPause()": [
+					{
+						"details": "The operation failed because the contract is paused."
+					}
+				],
+				"ExpectedPause()": [
+					{
+						"details": "The operation failed because the contract is not paused."
+					}
+				],
+				"FailedCall()": [
+					{
+						"details": "A call to an address target failed. The target may have reverted."
+					}
+				],
+				"InsufficientBalance(uint256,uint256)": [
+					{
+						"details": "The ETH balance of the account is not enough to perform the operation."
+					}
+				],
+				"OwnableInvalidOwner(address)": [
+					{
+						"details": "The owner is not a valid owner account. (eg. `address(0)`)"
+					}
+				],
+				"OwnableUnauthorizedAccount(address)": [
+					{
+						"details": "The caller account is not authorized to perform an operation."
+					}
+				],
+				"ReentrancyGuardReentrantCall()": [
+					{
+						"details": "Unauthorized reentrant call."
+					}
+				]
+			},
+			"events": {
+				"Paused(address)": {
+					"details": "Emitted when the pause is triggered by `account`."
+				},
+				"Unpaused(address)": {
+					"details": "Emitted when the pause is lifted by `account`."
+				}
+			},
+			"kind": "dev",
+			"methods": {
+				"cancelAgreement(uint256)": {
+					"params": {
+						"agreementId": "The agreement ID"
+					}
+				},
+				"checkRentOverdue(uint256)": {
+					"details": "Anyone can call this to flag overdue payments",
+					"params": {
+						"agreementId": "The agreement ID"
+					}
+				},
+				"createAgreement(uint256,address,uint256,uint256,uint256,uint256,string)": {
+					"params": {
+						"endDate": "Rental end timestamp",
+						"landlord": "Landlord's address",
+						"metadataHash": "IPFS hash containing full agreement terms",
+						"monthlyRent": "Monthly rent amount in wei",
+						"propertyId": "Verified property ID",
+						"rentInterval": "Rent payment interval in seconds (example 30 days = 2592000)",
+						"startDate": "Rental start timestamp"
+					}
+				},
+				"landlordConfirm(uint256)": {
+					"params": {
+						"agreementId": "The agreement ID"
+					}
+				},
+				"owner()": {
+					"details": "Returns the address of the current owner."
+				},
+				"paused()": {
+					"details": "Returns true if the contract is paused, and false otherwise."
+				},
+				"payRent(uint256,string)": {
+					"params": {
+						"agreementId": "The agreement ID",
+						"metadataHash": "IPFS hash with payment proof or receipt"
+					}
+				},
+				"raiseDispute(uint256,string,string)": {
+					"params": {
+						"agreementId": "The agreement ID",
+						"evidenceHash": "IPFS hash containing evidence (photos, receipts, messages)",
+						"reason": "Dispute reason"
+					}
+				},
+				"releaseDeposit(uint256)": {
+					"params": {
+						"agreementId": "The agreement ID"
+					}
+				},
+				"renounceOwnership()": {
+					"details": "Leaves the contract without owner. It will not be possible to call `onlyOwner` functions. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby disabling any functionality that is only available to the owner."
+				},
+				"resolveDispute(uint256,bool)": {
+					"params": {
+						"agreementId": "The agreement ID",
+						"refundTenant": "True to refund tenant, false to release to landlord"
+					}
+				},
+				"submitEvidence(uint256,string)": {
+					"params": {
+						"agreementId": "The agreement ID",
+						"evidenceHash": "IPFS hash of new evidence"
+					}
+				},
+				"tenantConfirm(uint256)": {
+					"params": {
+						"agreementId": "The agreement ID"
+					}
+				},
+				"terminateAgreement(uint256,uint256)": {
+					"params": {
+						"agreementId": "The agreement ID",
+						"proRatedRefund": "Amount to refund tenant (calculated off-chain)"
+					}
+				},
+				"transferOwnership(address)": {
+					"details": "Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner."
+				}
+			},
+			"title": "TrustLeaseEscrow",
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {
+				"calculateFeeBreakdown(uint256)": {
+					"notice": "Calculate total fees for an agreement (view only)"
+				},
+				"cancelAgreement(uint256)": {
+					"notice": "Cancel agreement before activation (full refund)"
+				},
+				"checkRentOverdue(uint256)": {
+					"notice": "Check and flag overdue rent payments"
+				},
+				"createAgreement(uint256,address,uint256,uint256,uint256,uint256,string)": {
+					"notice": "Create rental agreement with deposit and periodic rent terms"
+				},
+				"fundGasSubsidy()": {
+					"notice": "Fund gas subsidy pool"
+				},
+				"getAgreement(uint256)": {
+					"notice": "Get agreement details"
+				},
+				"getDispute(uint256)": {
+					"notice": "Get dispute details with evidence"
+				},
+				"getLandlordAgreements(address)": {
+					"notice": "Get landlord's agreements"
+				},
+				"getRentPayments(uint256)": {
+					"notice": "Get all rent payments for an agreement"
+				},
+				"getTenantAgreements(address)": {
+					"notice": "Get tenant's agreements"
+				},
+				"grantGasSubsidy(address)": {
+					"notice": "Grant gas subsidy to low-income tenant"
+				},
+				"landlordConfirm(uint256)": {
+					"notice": "Landlord confirms tenant details"
+				},
+				"pause()": {
+					"notice": "Emergency pause (admin only)"
+				},
+				"payRent(uint256,string)": {
+					"notice": "Pay monthly rent"
+				},
+				"raiseDispute(uint256,string,string)": {
+					"notice": "Raise dispute with evidence submission"
+				},
+				"releaseDeposit(uint256)": {
+					"notice": "Release deposit to landlord after lease ends"
+				},
+				"resolveDispute(uint256,bool)": {
+					"notice": "Admin resolves dispute with evidence review"
+				},
+				"submitEvidence(uint256,string)": {
+					"notice": "Submit additional evidence to existing dispute"
+				},
+				"tenantConfirm(uint256)": {
+					"notice": "Tenant confirms property after walkthrough"
+				},
+				"terminateAgreement(uint256,uint256)": {
+					"notice": "Admin-approved early termination with pro-rated refund"
+				},
+				"updateDisputePeriod(uint256)": {
+					"notice": "Update dispute period (admin only)"
+				},
+				"updateGracePeriod(uint256)": {
+					"notice": "Update default grace period for rent (admin only)"
+				},
+				"updatePlatformFee(uint256)": {
+					"notice": "Update platform fee (admin only)"
+				},
+				"updateRentProcessingFee(uint256)": {
+					"notice": "Update rent processing fee (admin only)"
+				}
+			},
+			"notice": "Core escrow contract with periodic rent payments, comprehensive fees, and enhanced dispute resolution",
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/TrustLeaseEscrow.sol": "TrustLeaseEscrow"
+		},
+		"evmVersion": "cancun",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": true,
+			"runs": 200
+		},
+		"remappings": [],
+		"viaIR": true
+	},
+	"sources": {
+		"@openzeppelin/contracts/access/Ownable.sol": {
+			"keccak256": "0xff6d0bb2e285473e5311d9d3caacb525ae3538a80758c10649a4d61029b017bb",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://8ed324d3920bb545059d66ab97d43e43ee85fd3bd52e03e401f020afb0b120f6",
+				"dweb:/ipfs/QmfEckWLmZkDDcoWrkEvMWhms66xwTLff9DDhegYpvHo1a"
+			]
+		},
+		"@openzeppelin/contracts/utils/Address.sol": {
+			"keccak256": "0x6d0ae6e206645341fd122d278c2cb643dea260c190531f2f3f6a0426e77b00c0",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://032d1201d839435be2c85b72e33206b3ea980c569d6ebf7fa57d811ab580a82f",
+				"dweb:/ipfs/QmeqQjAtMvdZT2tG7zm39itcRJkuwu8AEReK6WRnLJ18DD"
+			]
+		},
+		"@openzeppelin/contracts/utils/Context.sol": {
+			"keccak256": "0x493033a8d1b176a037b2cc6a04dad01a5c157722049bbecf632ca876224dd4b2",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://6a708e8a5bdb1011c2c381c9a5cfd8a9a956d7d0a9dc1bd8bcdaf52f76ef2f12",
+				"dweb:/ipfs/Qmax9WHBnVsZP46ZxEMNRQpLQnrdE4dK8LehML1Py8FowF"
+			]
+		},
+		"@openzeppelin/contracts/utils/Errors.sol": {
+			"keccak256": "0x6afa713bfd42cf0f7656efa91201007ac465e42049d7de1d50753a373648c123",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://ba1d02f4847670a1b83dec9f7d37f0b0418d6043447b69f3a29a5f9efc547fcf",
+				"dweb:/ipfs/QmQ7iH2keLNUKgq2xSWcRmuBE5eZ3F5whYAkAGzCNNoEWB"
+			]
+		},
+		"@openzeppelin/contracts/utils/Pausable.sol": {
+			"keccak256": "0xdb484371dfbb848cb6f5d70464e9ac9b2900e4164ead76bbce4fef0b44bcc68f",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://f9d6f6f6600a2bec622f699081b58350873b5e63ce05464d17d674a290bb8a7c",
+				"dweb:/ipfs/QmQKVzSQY1PM3Bid4QhgVVZyx6B4Jx7XgaQzLKHj38vJz8"
+			]
+		},
+		"@openzeppelin/contracts/utils/ReentrancyGuard.sol": {
+			"keccak256": "0x11a5a79827df29e915a12740caf62fe21ebe27c08c9ae3e09abe9ee3ba3866d3",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://3cf0c69ab827e3251db9ee6a50647d62c90ba580a4d7bbff21f2bea39e7b2f4a",
+				"dweb:/ipfs/QmZiKwtKU1SBX4RGfQtY7PZfiapbbu6SZ9vizGQD9UHjRA"
+			]
+		},
+		"contracts/TrustLeaseEscrow.sol": {
+			"keccak256": "0x721697bb62ea9efc93d00fa81512fedf22f4932fb19b73e3da9c35ded0c0c209",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://56a679ed63a67f16e64cc55b20b32ec88d5419330cfd8d58ad74c0e393f1736c",
+				"dweb:/ipfs/QmSRQTttkR4awD42XJPmZvhcPfFp1C5uE6MPNJiHavM2CN"
+			]
+		}
+	},
+	"version": 1
+}
