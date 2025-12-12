@@ -3,7 +3,7 @@ Built on **Flow EVM Testnet**
 
 TrustLease is a transparent, blockchain-powered rental system that protects tenants and landlords from scams using **on-chain verification**, **escrow deposits**, and **NFT rent receipts**.
 
-This project was built for hackathon purposes to demonstrate how Web3 can make real-life rental systems safer, more trustworthy, and impossible to manipulate.
+This project demonstrates how Web3 can make real-life rental systems safer, transparent, and fully protected from manipulation.
 
 ---
 
@@ -89,11 +89,12 @@ Used for property images, documents, etc.
 - Flow EVM Testnet RPC  
 
 ### **Smart Contract**
-- Solidity (`^0.8.x`)  
+- Solidity (`^0.8.28`)  
 - Flow EVM Testnet  
-- Hardhat / Remix  
+- Remix
 
 ---
 
 # 📁 Project Structure
+
 
