@@ -159,10 +159,17 @@ MIT License — free for learning and improvement.
 
 ---
 
+## 📄 Project Documentation
+
+- **Ideathon PDF (Problem, Solution, MVP, Ethics, References):**
+https://docs.google.com/document/d/1ty7gOb2uLMPzKGmKJMqdwJeG4cHodNEp2LhRrRn_rKs/edit?usp=sharing
+
+
 # 🙏 Acknowledgements
 Thanks to:
 - Flow Blockchain Team.
 - Open-source libraries that powered this project  
+
 
 
 
