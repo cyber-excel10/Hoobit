@@ -96,13 +96,13 @@ Used for property images, documents, etc.
 ## 🔗 Smart Contracts (Flow EVM Testnet)
 
 - **PropertyVerification:**  
-  `0x1d81c1F05926719bF8acBDeF8c222C017Aabb227`
+  `https://evm-testnet.flowscan.io/address/0x1d81c1F05926719bF8acBDeF8c222C017Aabb227`
 
 - **TrustLeaseEscrow:**  
-  `0x6aF18130AAF6AC485FE2b236c9570E1A487C0574`
+  `https://evm-testnet.flowscan.io/address/0xD11098885107e58F6E5311dC4A6E924739AeE5C7`
 
 - **RentalReceipt (NFT):**  
-  `0xa22f7A8539004b5850CC5810E0F04f32F63F100B`
+  `https://evm-testnet.flowscan.io/address/0xa22f7A8539004b5850CC5810E0F04f32F63F100B`
 
 All contracts are deployed and verifiable on Flow EVM Testnet.
 
@@ -169,6 +169,7 @@ https://docs.google.com/document/d/1ty7gOb2uLMPzKGmKJMqdwJeG4cHodNEp2LhRrRn_rKs/
 Thanks to:
 - Flow Blockchain Team.
 - Open-source libraries that powered this project  
+
 
 
 
