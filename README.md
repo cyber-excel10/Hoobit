@@ -93,6 +93,20 @@ Used for property images, documents, etc.
 - Flow EVM Testnet  
 - Remix
 
+## 🔗 Smart Contracts (Flow EVM Testnet)
+
+- **PropertyVerification:**  
+  `0x1d81c1F05926719bF8acBDeF8c222C017Aabb227`
+
+- **TrustLeaseEscrow:**  
+  `0x6aF18130AAF6AC485FE2b236c9570E1A487C0574`
+
+- **RentalReceipt (NFT):**  
+  `0xa22f7A8539004b5850CC5810E0F04f32F63F100B`
+
+All contracts are deployed and verifiable on Flow EVM Testnet.
+
+
 
 ---
 
@@ -149,5 +163,6 @@ MIT License — free for learning and improvement.
 Thanks to:
 - Flow Blockchain Team.
 - Open-source libraries that powered this project  
+
 
 
