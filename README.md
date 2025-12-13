@@ -93,8 +93,61 @@ Used for property images, documents, etc.
 - Flow EVM Testnet  
 - Remix
 
+
 ---
 
-# 📁 Project Structure
+# 🔧 How to Run Locally
+
+## 1️⃣ Clone the repository  
+git clone (https://github.com/cyber-excel10/Hoobit)
+
+# 🧠 How It Works (Clear Explanation)
+
+### **1. Property Listing**
+Landlord submits details → contract saves data permanently → anyone can verify authenticity.
+
+### **2. Property Verification**
+Platform verifies property → prevents scammers from adding fake listings.
+
+### **3. Agreement + Escrow**
+Tenant creates agreement → deposit locked → blockchain holds the money.
+
+### **4. Move-in Confirmation**
+Both sides confirm → contract activates.
+
+### **5. Rent Payment**
+Tenant pays rent → smart contract mints an NFT receipt.
+
+### **6. Permanent History**
+All actions are visible forever, providing:
+- Transparency  
+- Proof  
+- Trust  
+
+---
+
+# 🎯 Vision
+TrustLease aims to become the safest rental system in Africa —  
+where no one can lose money to fake landlords ever again.
+
+Blockchain + escrow + transparency = **zero scam rentals**.
+
+---
+
+# 🤝 Contributors
+- **Joseph (Lead Developer, Smart Contracts & Frontend)**  
+- AI-assisted development (due to frontend teammate unavailability)
+
+---
+
+# 🏁 License
+MIT License — free for learning and improvement.
+
+---
+
+# 🙏 Acknowledgements
+Thanks to:
+- Flow Blockchain Team.
+- Open-source libraries that powered this project  
 
 
